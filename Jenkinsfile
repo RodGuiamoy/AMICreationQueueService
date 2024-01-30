@@ -44,21 +44,21 @@ pipeline {
                 }
             }
         }
-        stage('GetUpcomingBuilds') {
-            steps {
-                script {
-                    // Get builds that are already past due, and set to be run in the next 15 minutes from Json content
-                    // Calculate delay and add it as a property
-                }
-            }
-        }
-        stage('ScheduleBuilds') {
-            steps {
-                script {
-                    // Loop through upcoming builds and schedule them
-                }
-            }
+        // stage('GetUpcomingBuilds') {
+        //     steps {
+        //         script {
+        //             // Get builds that are already past due, and set to be run in the next 15 minutes from Json content
+        //             // Calculate delay and add it as a property
+        //         }
+        //     }
+        // }
+        // stage('ScheduleBuilds') {
+        //     steps {
+        //         script {
+        //             // Loop through upcoming builds and schedule them
+        //         }
+        //     }
 
-        }
+        // }
     }
 }
