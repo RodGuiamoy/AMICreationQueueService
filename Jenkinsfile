@@ -9,7 +9,7 @@ pipeline {
         stage('TEST') {
             steps {
                 script {
-                    def fileContent = readFile('C:\code\AMICreationQueueService\Test.txt')
+                    def fileContent = readFile('C:\\code\\AMICreationQueueService\\Test.txt')
                     println fileContent
                 }
             }
