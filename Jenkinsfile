@@ -23,7 +23,6 @@ def setDelayedBuild(environment, instanceNames, ticketNumber, mode, scheduledBui
 
     def params = [
         new StringParameterValue('Environment', environment),
-        new StringParameterValue('Region', region),
         new StringParameterValue('InstanceNames', instanceNames),
         new StringParameterValue('TicketNumber', ticketNumber),
         new StringParameterValue('Mode', mode),
