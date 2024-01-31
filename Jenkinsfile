@@ -9,7 +9,7 @@ class scheduledBuild {
     String mode
     String date
     String time
-    Int secondsFromNow
+    int secondsFromNow
     String scheduledBuildId
 }
 
