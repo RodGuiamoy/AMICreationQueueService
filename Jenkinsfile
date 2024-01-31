@@ -13,6 +13,28 @@ class scheduledBuild {
     String scheduledBuildId
 }
 
+def setDelayedBuild(environment, instanceNames, ticketNumber, mode, scheduledBuildId, date, time, secondsFromNow) {
+    // def job = Hudson.instance.getJob('AMICreationPipeline')
+    def job = Jenkins.instance.getItemByFullName('TEST')
+
+    if (job == null) {
+        throw new IllegalStateException("Job not found: TEST")
+    }
+
+    def params = [
+        new StringParameterValue('Environment', environment),
+        new StringParameterValue('Region', region),
+        new StringParameterValue('InstanceNames', instanceNames),
+        new StringParameterValue('TicketNumber', ticketNumber),
+        new StringParameterValue('Mode', mode),
+        new StringParameterValue('Date', date),
+        new StringParameterValue('Time', time),
+        new StringParameterValue('ScheduledBuildId', scheduledBuildId)
+    ]
+
+    def future = job.scheduleBuild2(secondsFromNow, new ParametersAction(params))
+}
+
 def scheduledBuilds = []
 def upcomingBuilds = []
 
@@ -98,11 +120,16 @@ pipeline {
                 }
             }
         }
-        // stage('QueueBuildsForExecution') {
-        //     steps {
-        //         script {
-        //         }
-        //     }
-        // }
+        stage('QueueBuildsForExecution') {
+            steps {
+                script {
+                    upcomingBuilds.each { item ->
+                        // Example usage
+                        setDelayedBuild(item.environment, item.instanceNames, item.ticketNumber, item.mode, item.scheduledBuildId, item.date, item.time, item.secondsFromNow)
+                    }
+                }
+            }
+        }
     }
 }
+
