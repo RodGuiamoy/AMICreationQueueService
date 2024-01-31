@@ -9,7 +9,7 @@ class scheduledBuild {
     String mode
     String date
     String time
-    String secondsFromNow
+    Int secondsFromNow
     String scheduledBuildId
 }
 
@@ -42,7 +42,6 @@ pipeline {
                     
                     scheduledBuilds.each { item ->
                         
-
                         executionDateTimeStr = item.date + ' ' + item.time
 
                         Date executionDateTime = null
@@ -66,6 +65,8 @@ pipeline {
                         // Convert the difference to seconds
                         int secondsFromNow = differenceInMillis / 1000
 
+                        item.secondsFromNow = secondsFromNow
+
                         if (secondsFromNow <= 0 || secondsFromNow < 900) {
 
                             upcomingBuilds << item
@@ -88,6 +89,7 @@ pipeline {
                         upcomingBuildsStr += "Mode: ${item.mode}\n"
                         upcomingBuildsStr += "Date: ${item.date}\n"
                         upcomingBuildsStr += "Time: ${item.time}\n"
+                        upcomingBuildsStr += "SecondsFromNow: ${item.secondsFromNow}\n"
                         upcomingBuildsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
                         upcomingBuildsStr += "-----------------------\n"
                     }
@@ -96,5 +98,11 @@ pipeline {
                 }
             }
         }
+        // stage('QueueBuildsForExecution') {
+        //     steps {
+        //         script {
+        //         }
+        //     }
+        // }
     }
 }
