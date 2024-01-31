@@ -51,8 +51,8 @@ pipeline {
                 script {
 
                     jsonData.each { scheduledBuild -> 
-                        def environment = scheduledBuild.environment
-                        def instanceNames = scheduledBuild.instanceNames
+                        def environment = scheduledBuild.Name
+                        def instanceNames = scheduledBuild.Age
                         
                         println "Environment: $environment, InstanceNames: $instanceNames"
                     }

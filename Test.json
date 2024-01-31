@@ -1,12 +1,10 @@
 [
     {
-        
-        "environment": "rod_aws",
-        "instanceNames": "TESTEC2",
-        "ticketNumber": "TESTTICKET",
-        "mode": "Adhoc",
-        "date": "01/31/2024",
-        "time": "14:00",
-        "scheduledBuildId": "TESTID"
+        "Name": "TEST",
+        "Age": 3
+    },
+    {
+        "Name": "TEST2",
+        "Age": 3
     }
 ]
