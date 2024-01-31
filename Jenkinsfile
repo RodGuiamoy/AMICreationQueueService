@@ -37,18 +37,9 @@ pipeline {
         stage('GetUpcomingBuilds') {
             steps {
                 script {
-                    def scheduledBuildsStr = "Scheduled builds:\n"
-                    scheduledBuildsStr += "-----------------------\n"
+                    
                     scheduledBuilds.each { item ->
-                        scheduledBuildsStr += "Environment: ${item.environment}\n"
-                        scheduledBuildsStr += "Instance Names: ${item.instanceNames}\n"
-                        scheduledBuildsStr += "Ticket Number: ${item.ticketNumber}\n"
-                        scheduledBuildsStr += "Mode: ${item.mode}\n"
-                        scheduledBuildsStr += "Date: ${item.date}\n"
-                        scheduledBuildsStr += "Time: ${item.time}\n"
-                        scheduledBuildsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
-                        scheduledBuildsStr += "-----------------------\n"
-
+                        
                         executionDateStr = item.date + ' ' + item.time
 
                         // Get the current date and time
@@ -66,13 +57,29 @@ pipeline {
                         if (minutesDifference <= 0 || minutesDifference < 15) {
                             // The input date is earlier than or within 15 minutes of the current time
                             println("The input date is earlier than or within 15 minutes of the current time.")
+
+                            upcomingBuilds << item
+
+
                         } else {
-                            // The input date is more than 15 minutes in the future
-                            println("The input date is more than 15 minutes in the future.")
-                        }
+                        //     // The input date is more than 15 minutes in the future
+                        //     println("The input date is more than 15 minutes in the future.")
+                        // }
                     }
 
-                    echo "${scheduledBuildsStr}"
+                    def upcomingBuildsStr = "Upcoming builds:\n"
+                    upcomingBuildsStr += "-----------------------\n"
+                    upcomingBuilds.each { item ->
+                        upcomingBuildsStr += "Environment: ${item.environment}\n"
+                        upcomingBuildsStr += "Instance Names: ${item.instanceNames}\n"
+                        upcomingBuildsStr += "Ticket Number: ${item.ticketNumber}\n"
+                        upcomingBuildsStr += "Mode: ${item.mode}\n"
+                        upcomingBuildsStr += "Date: ${item.date}\n"
+                        upcomingBuildsStr += "Time: ${item.time}\n"
+                        upcomingBuildsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
+                        upcomingBuildsStr += "-----------------------\n"
+                    }
+                    echo "${upcomingBuildsStr}"
                     
                 }
             }
