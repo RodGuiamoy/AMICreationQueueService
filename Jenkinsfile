@@ -1,4 +1,4 @@
-def jsonData = []
+def jsonData
 
 pipeline {
     agent any
