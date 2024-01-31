@@ -9,7 +9,7 @@ pipeline {
                 script {
                     // Assuming the JSON file is named 'data.json' and located in the workspace
                     def jsonFile = readFile 'Test.json'
-                    def jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
+                    jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
 
                     
                 }
