@@ -32,26 +32,33 @@ pipeline {
                     if (!jsonData) {
 
                         // println "JSON file not found at $filePath"
-                        error ("JSON content is empty.")
+                        error ("Null JSON content.")
                        
                     } 
 
-                    // Access JSON data here
-                    def name = jsonData.Name
-                    def age = jsonData.Age
-                    println "Name: $name, Age: $age"
+                    // // Access JSON data here
+                    // def name = jsonData.Name
+                    // def age = jsonData.Age
+                    // println "Name: $name, Age: $age"
                     
                 }
             }
         }
-        // stage('GetUpcomingBuilds') {
-        //     steps {
-        //         script {
-        //             // Get builds that are already past due, and set to be run in the next 15 minutes from Json content
-        //             // Calculate delay and add it as a property
-        //         }
-        //     }
-        // }
+        stage('GetUpcomingBuilds') {
+            steps {
+                script {
+
+                    jsonData.each { scheduledBuild -> 
+                        def environment = scheduledBuild.environment
+                        def instanceNames = scheduledBuild.instanceNames
+                        
+                        println "Environment: $environment, InstanceNames: $instanceNames"
+                    }
+                    // Get builds that are already past due, and set to be run in the next 15 minutes from Json content
+                    // Calculate delay and add it as a property
+                }
+            }
+        }
         // stage('ScheduleBuilds') {
         //     steps {
         //         script {
