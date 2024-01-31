@@ -1,19 +1,33 @@
 import groovy.json.JsonSlurper
 
-def readJsonFromFile(String filePath) {
-    def slurper = new JsonSlurper()
-    def jsonFile = new File(filePath)
+// def readJsonFromFile(String filePath) {
+//     def slurper = new JsonSlurper()
+//     def jsonFile = new File(filePath)
 
-    if (jsonFile.exists()) {
-        def jsonContents = slurper.parseText(jsonFile.text)
-        return jsonContents
-    } else {
-        return null
-    }
-}
+//     if (jsonFile.exists()) {
+//         def jsonContents = slurper.parseText(jsonFile.text)
+//         return jsonContents
+//     } else {
+//         return null
+//     }
+// }
 
 def readFile(String filePath) {
     return new File(filePath).text
+}
+
+@NonCPS
+def readJsonFromFile(String filePath) {
+    def jsonText = readFile(file: filePath)
+    def jsonParsed = new groovy.json.JsonSlurper().parseText(jsonText)
+    return convertToSerializableMap(jsonParsed)
+}
+
+@NonCPS
+def convertToSerializableMap(def nonSerializableMap) {
+    return nonSerializableMap.collectEntries { key, value ->
+        [(key): value instanceof Map ? convertToSerializableMap(value) : value]
+    }
 }
 
 def jsonData = []
@@ -51,8 +65,8 @@ pipeline {
                 script {
 
                     jsonData.each { scheduledBuild -> 
-                        def environment = scheduledBuild.Name
-                        def instanceNames = scheduledBuild.Age
+                        def environment = scheduledBuild.environment
+                        def instanceNames = scheduledBuild.instanceNames
                         
                         println "Environment: $environment, InstanceNames: $instanceNames"
                     }
