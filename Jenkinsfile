@@ -16,7 +16,7 @@ def readFile(String filePath) {
     return new File(filePath).text
 }
 
-def jsonData = null
+def jsonData = []
 
 pipeline {
     agent any
