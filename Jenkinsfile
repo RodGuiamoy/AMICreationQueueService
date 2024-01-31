@@ -1,7 +1,3 @@
-// import java.time.LocalDateTime
-// import java.time.format.DateTimeFormatter
-// import java.time.temporal.ChronoUnit
-
 class scheduledBuild {
     String environment
     String instanceNames
@@ -13,9 +9,9 @@ class scheduledBuild {
     String scheduledBuildId
 }
 
-def setDelayedBuild(environment, instanceNames, ticketNumber, mode, scheduledBuildId, date, time, secondsFromNow) {
+def queueAMICreation(environment, instanceNames, ticketNumber, mode, scheduledBuildId, date, time, secondsFromNow) {
     // def job = Hudson.instance.getJob('AMICreationPipeline')
-    def job = Jenkins.instance.getItemByFullName('TEST')
+    def job = Jenkins.instance.getItemByFullName('AMICreationPipeline')
 
     if (job == null) {
         throw new IllegalStateException("Job not found: TEST")
@@ -34,8 +30,8 @@ def setDelayedBuild(environment, instanceNames, ticketNumber, mode, scheduledBui
     def future = job.scheduleBuild2(secondsFromNow, new ParametersAction(params))
 }
 
-def scheduledBuilds = []
-def upcomingBuilds = []
+def scheduledAMICreations = []
+def upcomingAMICreations = []
 
 pipeline {
     agent any
@@ -51,17 +47,17 @@ pipeline {
 
                     // Loop through each item in the JSON array
                     jsonData.each { item ->
-                        scheduledBuilds << new scheduledBuild(environment: item.environment,  instanceNames: item.instanceNames, ticketNumber: item.ticketNumber, mode: item.mode, date: item.date, time: item.time, scheduledBuildId: item.scheduledBuildId)
+                        scheduledAMICreations << new scheduledBuild(environment: item.environment,  instanceNames: item.instanceNames, ticketNumber: item.ticketNumber, mode: item.mode, date: item.date, time: item.time, scheduledBuildId: item.scheduledBuildId)
                     }
                     
                 }
             }
         }
-        stage('GetUpcomingBuilds') {
+        stage('GetUpcomingAMICreationRequests') {
             steps {
                 script {
                     
-                    scheduledBuilds.each { item ->
+                    scheduledAMICreations.each { item ->
                         
                         executionDateTimeStr = item.date + ' ' + item.time
 
@@ -90,41 +86,41 @@ pipeline {
 
                         if (secondsFromNow <= 0 || secondsFromNow < 900) {
 
-                            upcomingBuilds << item
+                            upcomingAMICreations << item
 
                         }
                     }
 
-                    if (upcomingBuilds.isEmpty()) {
+                    if (upcomingAMICreations.isEmpty()) {
                          echo 'No upcoming builds identified.'
                         currentBuild.result = 'SUCCESS'
                         return
                     }
 
-                    def upcomingBuildsStr = "Upcoming builds:\n"
-                    upcomingBuildsStr += "-----------------------\n"
-                    upcomingBuilds.each { item ->
-                        upcomingBuildsStr += "Environment: ${item.environment}\n"
-                        upcomingBuildsStr += "Instance Names: ${item.instanceNames}\n"
-                        upcomingBuildsStr += "Ticket Number: ${item.ticketNumber}\n"
-                        upcomingBuildsStr += "Mode: ${item.mode}\n"
-                        upcomingBuildsStr += "Date: ${item.date}\n"
-                        upcomingBuildsStr += "Time: ${item.time}\n"
-                        upcomingBuildsStr += "SecondsFromNow: ${item.secondsFromNow}\n"
-                        upcomingBuildsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
-                        upcomingBuildsStr += "-----------------------\n"
+                    def upcomingAMICreationsStr = "Upcoming builds:\n"
+                    upcomingAMICreationsStr += "-----------------------\n"
+                    upcomingAMICreations.each { item ->
+                        upcomingAMICreationsStr += "Environment: ${item.environment}\n"
+                        upcomingAMICreationsStr += "Instance Names: ${item.instanceNames}\n"
+                        upcomingAMICreationsStr += "Ticket Number: ${item.ticketNumber}\n"
+                        upcomingAMICreationsStr += "Mode: ${item.mode}\n"
+                        upcomingAMICreationsStr += "Date: ${item.date}\n"
+                        upcomingAMICreationsStr += "Time: ${item.time}\n"
+                        upcomingAMICreationsStr += "SecondsFromNow: ${item.secondsFromNow}\n"
+                        upcomingAMICreationsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
+                        upcomingAMICreationsStr += "-----------------------\n"
                     }
 
-                    echo "${upcomingBuildsStr}"
+                    echo "${upcomingAMICreationsStr}"
                 }
             }
         }
-        stage('QueueBuildsForExecution') {
+        stage('QueueAMICreationRequestsForExecution') {
             steps {
                 script {
-                    upcomingBuilds.each { item ->
+                    upcomingAMICreations.each { item ->
                         // Example usage
-                        setDelayedBuild(item.environment, item.instanceNames, item.ticketNumber, item.mode, item.scheduledBuildId, item.date, item.time, item.secondsFromNow)
+                        queueAMICreation(item.environment, item.instanceNames, item.ticketNumber, item.mode, item.scheduledBuildId, item.date, item.time, item.secondsFromNow)
                     }
                 }
             }

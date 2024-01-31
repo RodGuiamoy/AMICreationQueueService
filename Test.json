@@ -5,7 +5,7 @@
         "ticketNumber": "TESTTICKET",
         "mode": "Adhoc",
         "date": "01/31/2024",
-        "time": "09:00",
+        "time": "12:46",
         "scheduledBuildId": "TESTID"
     }, 
     {
@@ -14,7 +14,7 @@
         "ticketNumber": "TESTTICKET_2",
         "mode": "Adhoc",
         "date": "01/31/2024",
-        "time": "11:43",
+        "time": "17:46",
         "scheduledBuildId": "TESTID_2"
     },
     {
@@ -23,7 +23,7 @@
         "ticketNumber": "TESTTICKET_3",
         "mode": "Adhoc",
         "date": "01/31/2024",
-        "time": "14:00",
+        "time": "17:46",
         "scheduledBuildId": "TESTID_3"
     }
 ]
