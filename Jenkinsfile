@@ -68,6 +68,7 @@ pipeline {
                         def environment = scheduledBuild.environment
                         def instanceNames = scheduledBuild.instanceNames
                         
+                        
                         println "Environment: $environment, InstanceNames: $instanceNames"
                     }
                     // Get builds that are already past due, and set to be run in the next 15 minutes from Json content

@@ -1,6 +1,5 @@
 [
     {
-        
         "environment": "rod_aws",
         "instanceNames": "TESTEC2",
         "ticketNumber": "TESTTICKET",
