@@ -16,6 +16,8 @@ def readFile(String filePath) {
     return new File(filePath).text
 }
 
+def jsonData = null
+
 pipeline {
     agent any
 
@@ -27,7 +29,7 @@ pipeline {
                 script {
 
                     def filePath = 'C:\\code\\AMICreationQueueService\\Test.json'
-                    def jsonData = readJsonFromFile(filePath)
+                    jsonData = readJsonFromFile(filePath)
 
                     if (!jsonData) {
 
