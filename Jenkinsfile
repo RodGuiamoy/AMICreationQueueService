@@ -1,4 +1,3 @@
-def jsonData
 
 pipeline {
     agent any
@@ -9,7 +8,7 @@ pipeline {
                 script {
                     // Assuming the JSON file is named 'data.json' and located in the workspace
                     def jsonFile = readFile 'Test.json'
-                    jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
+                    def jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
 
                     // Loop through each item in the JSON array
                     jsonData.each { item ->
