@@ -1,6 +1,6 @@
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
+// import java.time.LocalDateTime
+// import java.time.format.DateTimeFormatter
+// import java.time.temporal.ChronoUnit
 
 class scheduledBuild {
     String environment
@@ -9,6 +9,7 @@ class scheduledBuild {
     String mode
     String date
     String time
+    String secondsFromNow
     String scheduledBuildId
 }
 
@@ -40,32 +41,41 @@ pipeline {
                     
                     scheduledBuilds.each { item ->
                         
-                        executionDateStr = item.date + ' ' + item.time
 
+                        executionDateTimeStr = item.date + ' ' + item.time
+
+                        Date executionDateTime = null
+
+                        try {
+                            // Parse the future date and time
+                            def dateFormat = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm")
+                            executionDateTime = dateFormat.parse(executionDateTimeStr)
+                        }
+                        catch (ex) {
+                            // Handle the error without failing the build
+                            unstable("Unable to parse DateTime ${executionDateTimeStr}.")
+                        }
+                        
                         // Get the current date and time
-                        LocalDateTime currentDateTime = LocalDateTime.now()
+                        Date currentDate = new Date()
 
-                        // Define the format pattern for your input date and time
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm")
+                        // Calculate the difference in milliseconds
+                        long differenceInMillis = executionDateTime.time - currentDate.time
 
-                        // Parse the input date and time (replace this with your input)
-                        LocalDateTime inputDateTime = LocalDateTime.parse(executionDateStr, formatter)
+                        // Convert the difference to seconds
+                        int secondsFromNow = differenceInMillis / 1000
 
-                        // Calculate the time difference in minutes
-                        long minutesDifference = ChronoUnit.MINUTES.between(currentDateTime, inputDateTime)
-
-                        if (minutesDifference <= 0 || minutesDifference < 15) {
-                            // The input date is earlier than or within 15 minutes of the current time
-                            println("The input date is earlier than or within 15 minutes of the current time.")
+                        if (secondsFromNow <= 0 || secondsFromNow < 900) {
 
                             upcomingBuilds << item
 
                         }
-                        // } else {
-                        // //     // The input date is more than 15 minutes in the future
-                        // //     println("The input date is more than 15 minutes in the future.")
-                        // // }
-                        // }
+                    }
+
+                    if (upcomingBuilds.isEmpty()) {
+                         echo 'No upcoming builds identified.'
+                        currentBuild.result = 'SUCCESS'
+                        return
                     }
 
                     def upcomingBuildsStr = "Upcoming builds:\n"
@@ -80,7 +90,7 @@ pipeline {
                         upcomingBuildsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
                         upcomingBuildsStr += "-----------------------\n"
                     }
-                    
+
                     echo "${upcomingBuildsStr}"
                 }
             }
