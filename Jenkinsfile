@@ -12,9 +12,9 @@ import groovy.json.JsonSlurper
 //     }
 // }
 
-def readFile(String filePath) {
-    return new File(filePath).text
-}
+// def readFile(String filePath) {
+//     return new File(filePath).text
+// }
 
 @NonCPS
 def readJsonFromFile(String filePath) {
