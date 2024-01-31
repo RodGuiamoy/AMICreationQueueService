@@ -1,88 +1,29 @@
-import groovy.json.JsonSlurper
-
-// def readJsonFromFile(String filePath) {
-//     def slurper = new JsonSlurper()
-//     def jsonFile = new File(filePath)
-
-//     if (jsonFile.exists()) {
-//         def jsonContents = slurper.parseText(jsonFile.text)
-//         return jsonContents
-//     } else {
-//         return null
-//     }
-// }
-
-// def readFile(String filePath) {
-//     return new File(filePath).text
-// }
-
-@NonCPS
-def readJsonFromFile(String filePath) {
-    def jsonText = readFile(file: filePath)
-    def jsonParsed = new groovy.json.JsonSlurper().parseText(jsonText)
-    return convertToSerializableMap(jsonParsed)
-}
-
-@NonCPS
-def convertToSerializableMap(def nonSerializableMap) {
-    return nonSerializableMap.collectEntries { key, value ->
-        [(key): value instanceof Map ? convertToSerializableMap(value) : value]
-    }
-}
-
-def jsonData = []
-
 pipeline {
     agent any
 
-    // build schedule
-
     stages {
-        stage('ReadJSON') {
+        stage('Read and Process JSON') {
             steps {
                 script {
+                    // Assuming the JSON file is named 'data.json' and located in the workspace
+                    def jsonFile = readFile 'Test.json'
+                    def jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
 
-                    def filePath = 'C:\\code\\AMICreationQueueService\\Test.json'
-                    jsonData = readJsonFromFile(filePath)
-
-                    if (!jsonData) {
-
-                        // println "JSON file not found at $filePath"
-                        error ("Null JSON content.")
-                       
-                    } 
-
-                    // // Access JSON data here
-                    // def name = jsonData.Name
-                    // def age = jsonData.Age
-                    // println "Name: $name, Age: $age"
-                    
-                }
-            }
-        }
-        stage('GetUpcomingBuilds') {
-            steps {
-                script {
-
-                    jsonData.each { scheduledBuild -> 
-                        def environment = scheduledBuild.environment
-                        def instanceNames = scheduledBuild.instanceNames
-                        
-                        
-                        println "Environment: $environment, InstanceNames: $instanceNames"
+                    // Loop through each item in the JSON array
+                    jsonData.each { item ->
+                        echo "Processing: ${item.environment}"
+                        // Add your processing logic here
+                        // For example:
+                        echo "Environment: ${item.environment}"
+                        echo "Instance Names: ${item.instanceNames}"
+                        echo "Ticket Number: ${item.ticketNumber}"
+                        echo "Mode: ${item.mode}"
+                        echo "Date: ${item.date}"
+                        echo "Time: ${item.time}"
+                        echo "Scheduled Build ID: ${item.scheduledBuildId}"
                     }
-                    // Get builds that are already past due, and set to be run in the next 15 minutes from Json content
-                    // Calculate delay and add it as a property
                 }
             }
         }
-        // stage('ScheduleBuilds') {
-        //     steps {
-        //         script {
-        //             // Loop through upcoming builds and schedule them
-        //         }
-        //     }
-
-        // }
     }
 }
