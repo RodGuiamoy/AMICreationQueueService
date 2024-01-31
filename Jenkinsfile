@@ -1,4 +1,5 @@
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 
 class scheduledBuild {
@@ -52,6 +53,12 @@ pipeline {
 
                         // Get the current date and time
                         LocalDateTime currentDateTime = LocalDateTime.now()
+
+                        // Define the format pattern for your input date and time
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm")
+
+                        // Parse the input date and time (replace this with your input)
+                        LocalDateTime inputDateTime = LocalDateTime.parse(executionDateStr, formatter)
 
                         // Parse the input date and time (replace this with your input)
                         LocalDateTime inputDateTime = LocalDateTime.parse(executionDateStr)
