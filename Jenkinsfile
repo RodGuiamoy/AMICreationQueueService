@@ -60,10 +60,11 @@ pipeline {
 
                             upcomingBuilds << item
 
-
-                        } else {
-                        //     // The input date is more than 15 minutes in the future
-                        //     println("The input date is more than 15 minutes in the future.")
+                        }
+                        // } else {
+                        // //     // The input date is more than 15 minutes in the future
+                        // //     println("The input date is more than 15 minutes in the future.")
+                        // // }
                         // }
                     }
 
@@ -79,8 +80,8 @@ pipeline {
                         upcomingBuildsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
                         upcomingBuildsStr += "-----------------------\n"
                     }
-                    echo "${upcomingBuildsStr}"
                     
+                    echo "${upcomingBuildsStr}"
                 }
             }
         }
