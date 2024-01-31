@@ -60,9 +60,6 @@ pipeline {
                         // Parse the input date and time (replace this with your input)
                         LocalDateTime inputDateTime = LocalDateTime.parse(executionDateStr, formatter)
 
-                        // Parse the input date and time (replace this with your input)
-                        LocalDateTime inputDateTime = LocalDateTime.parse(executionDateStr)
-
                         // Calculate the time difference in minutes
                         long minutesDifference = ChronoUnit.MINUTES.between(currentDateTime, inputDateTime)
 
