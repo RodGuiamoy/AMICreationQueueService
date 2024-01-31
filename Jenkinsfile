@@ -1,3 +1,6 @@
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
+
 class scheduledBuild {
     String environment
     String instanceNames
@@ -9,6 +12,7 @@ class scheduledBuild {
 }
 
 def scheduledBuilds = []
+def upcomingBuilds = []
 
 pipeline {
     agent any
@@ -23,17 +27,6 @@ pipeline {
 
                     // Loop through each item in the JSON array
                     jsonData.each { item ->
-                        // echo "Processing: ${item.environment}"
-                        // // Add your processing logic here
-                        // // For example:
-                        // echo "Environment: ${item.environment}"
-                        // echo "Instance Names: ${item.instanceNames}"
-                        // echo "Ticket Number: ${item.ticketNumber}"
-                        // echo "Mode: ${item.mode}"
-                        // echo "Date: ${item.date}"
-                        // echo "Time: ${item.time}"
-                        // echo "Scheduled Build ID: ${item.scheduledBuildId}"
-
                         scheduledBuilds << new scheduledBuild(environment: item.environment,  instanceNames: item.instanceNames, ticketNumber: item.ticketNumber, mode: item.mode, date: item.date, time: item.time, scheduledBuildId: item.scheduledBuildId)
                     }
                     
@@ -54,6 +47,25 @@ pipeline {
                         scheduledBuildsStr += "Time: ${item.time}\n"
                         scheduledBuildsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
                         scheduledBuildsStr += "-----------------------\n"
+
+                        executionDateStr = item.date + ' ' + item.time
+
+                        // Get the current date and time
+                        LocalDateTime currentDateTime = LocalDateTime.now()
+
+                        // Parse the input date and time (replace this with your input)
+                        LocalDateTime inputDateTime = LocalDateTime.parse(executionDateStr)
+
+                        // Calculate the time difference in minutes
+                        long minutesDifference = ChronoUnit.MINUTES.between(currentDateTime, inputDateTime)
+
+                        if (minutesDifference <= 0 || minutesDifference < 15) {
+                            // The input date is earlier than or within 15 minutes of the current time
+                            println("The input date is earlier than or within 15 minutes of the current time.")
+                        } else {
+                            // The input date is more than 15 minutes in the future
+                            println("The input date is more than 15 minutes in the future.")
+                        }
                     }
 
                     echo "${scheduledBuildsStr}"
