@@ -8,16 +8,18 @@ pipeline {
             steps {
                 script {
                     def jsonFile = readFile 'Test.json'
-                    jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
+                    def parsedJson = new groovy.json.JsonSlurper().parseText(jsonFile)
+                    // Convert LazyMap to a serializable HashMap
+                    jsonData = parsedJson.collectEntries { k, v -> [k, v] }
                 }
             }
         }
         stage('ProcessData') {
             steps {
                 script {
-                    // Check if jsonData is not null before processing
                     if (jsonData) {
-                        jsonData.each { item ->
+                        jsonData.each { key, value ->
+                            def item = value // Assuming each item in jsonData is a map
                             echo "Processing: ${item.environment}"
                             // Add your processing logic here
                             echo "Environment: ${item.environment}"
