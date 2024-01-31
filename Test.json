@@ -9,12 +9,12 @@
         "scheduledBuildId": "TESTID"
     },
     {
-        "environment": "rod_aws",
-        "instanceNames": "TESTEC2",
-        "ticketNumber": "TESTTICKET",
+        "environment": "rod_aws_2",
+        "instanceNames": "TESTEC2_2",
+        "ticketNumber": "TESTTICKET_2",
         "mode": "Adhoc",
         "date": "01/31/2024",
         "time": "14:00",
-        "scheduledBuildId": "TESTID"
+        "scheduledBuildId": "TESTID_2"
     }
 ]
