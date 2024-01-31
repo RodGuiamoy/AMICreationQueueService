@@ -5,7 +5,7 @@
         "ticketNumber": "TESTTICKET",
         "mode": "Adhoc",
         "date": "01/31/2024",
-        "time": "10:14",
+        "time": "09:00",
         "scheduledBuildId": "TESTID"
     },
     {
@@ -14,7 +14,16 @@
         "ticketNumber": "TESTTICKET_2",
         "mode": "Adhoc",
         "date": "01/31/2024",
-        "time": "14:00",
+        "time": "10:14",
         "scheduledBuildId": "TESTID_2"
+    },
+    {
+        "environment": "rod_aws_3",
+        "instanceNames": "TESTEC2_3",
+        "ticketNumber": "TESTTICKET_3",
+        "mode": "Adhoc",
+        "date": "01/31/2024",
+        "time": "14:00",
+        "scheduledBuildId": "TESTID_3"
     }
 ]
