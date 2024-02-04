@@ -41,6 +41,11 @@ def upcomingAMICreations = [] // AMI Creation Requests scheduled less than 15 mi
 pipeline {
     agent any
 
+    triggers {
+            // This cron syntax triggers the job every 15 minutes
+            cron('*/15 * * * *')
+        }
+
     stages {
         stage('ReadJSON') {
             steps {
