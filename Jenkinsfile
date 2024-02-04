@@ -12,7 +12,7 @@ class scheduledBuild {
     String scheduledBuildId
 }
 
-def queueAMICreation(scheduledBuildId, account, instanceNames, region, ticketNumber, mode,  date, time, secondsFromNow) {
+def queueAMICreation(scheduledBuildId, account, instanceNames, instanceIds, region, ticketNumber, mode,  date, time, secondsFromNow) {
     // def job = Hudson.instance.getJob('AMICreationPipeline')
     def job = Jenkins.instance.getItemByFullName('AMICreationPipeline')
 
@@ -23,6 +23,7 @@ def queueAMICreation(scheduledBuildId, account, instanceNames, region, ticketNum
     def params = [
         new StringParameterValue('Account', account),
         new StringParameterValue('InstanceNames', instanceNames),
+        new StringParameterValue('InstanceNames', instanceIDs),
         new StringParameterValue('Region', region),
         new StringParameterValue('TicketNumber', ticketNumber),
         new StringParameterValue('Mode', mode),
@@ -112,6 +113,7 @@ pipeline {
                         upcomingAMICreationsStr += "Scheduled Build Id: ${item.ScheduledBuildId}\n"
                         upcomingAMICreationsStr += "Account: ${item.Account}\n"
                         upcomingAMICreationsStr += "Instance Names: ${item.InstanceNames}\n"
+                        upcomingAMICreationsStr += "Instance IDs: ${item.InstanceIDs}\n"
                         upcomingAMICreationsStr += "Region: ${item.Region}\n"
                         upcomingAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
                         upcomingAMICreationsStr += "Mode: ${item.Mode}\n"
@@ -130,7 +132,7 @@ pipeline {
                 script {
                     upcomingAMICreations.each { item ->
                         // Example usage
-                        queueAMICreation(item.ScheduledBuildId, item.Account, item.InstanceNames, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
+                        queueAMICreation(item.ScheduledBuildId, item.Account, item.InstanceNames, item.InstanceIDs, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
                     }
                 }
             }
