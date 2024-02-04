@@ -12,7 +12,7 @@ class scheduledBuild {
     String scheduledBuildId
 }
 
-def queueAMICreation(scheduledBuildId, account, instanceNames, instanceIds, region, ticketNumber, mode,  date, time, secondsFromNow) {
+def queueAMICreation(scheduledBuildId, account, instanceNames, instanceIDs, region, ticketNumber, mode,  date, time, secondsFromNow) {
     // def job = Hudson.instance.getJob('AMICreationPipeline')
     def job = Jenkins.instance.getItemByFullName('AMICreationPipeline')
 
@@ -23,7 +23,7 @@ def queueAMICreation(scheduledBuildId, account, instanceNames, instanceIds, regi
     def params = [
         new StringParameterValue('Account', account),
         new StringParameterValue('InstanceNames', instanceNames),
-        new StringParameterValue('InstanceNames', instanceIDs),
+        new StringParameterValue('InstanceIDs', instanceIDs),
         new StringParameterValue('Region', region),
         new StringParameterValue('TicketNumber', ticketNumber),
         new StringParameterValue('Mode', mode),
