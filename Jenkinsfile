@@ -130,7 +130,7 @@ pipeline {
                 script {
                     upcomingAMICreations.each { item ->
                         // Example usage
-                        queueAMICreation(item.Account, item.InstanceNames, item.Regfions, item.TicketNumber, item.Mode, item.ScheduledBuildId, item.Date, item.Time, item.SecondsFromNow)
+                        queueAMICreation(item.ScheduledBuildId, item.Account, item.InstanceNames, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
                     }
                 }
             }
