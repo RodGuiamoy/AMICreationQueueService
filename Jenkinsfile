@@ -1,3 +1,6 @@
+import groovy.json.JsonSlurperClassic
+import groovy.json.JsonOutput
+
 class scheduledBuild {
     String environment
     String instanceNames
@@ -14,7 +17,7 @@ def queueAMICreation(environment, instanceNames, ticketNumber, mode, scheduledBu
     def job = Jenkins.instance.getItemByFullName('AMICreationPipeline')
 
     if (job == null) {
-        throw new IllegalStateException("Job not found: TEST")
+        throw new IllegalStateException("Job not found: AMICreationPipeline")
     }
 
     def params = [
@@ -31,7 +34,7 @@ def queueAMICreation(environment, instanceNames, ticketNumber, mode, scheduledBu
 }
 
 def scheduledAMICreations = []
-def upcomingAMICreations = []
+def upcomingAMICreations = [] // AMI Creation Requests scheduled less than 15 minutes from now
 
 pipeline {
     agent any
@@ -42,12 +45,26 @@ pipeline {
                 script {
                     // Assuming the JSON file is named 'data.json' and located in the workspace
                     //def jsonFile = readFile 'Test.json'
-                    def jsonFile = readFile 'C:\\code\\AMICreationQueueService\\Test.json'
-                    def jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
+                    // def jsonFile = readFile 'C:\\code\\AMICreationQueueService\\Test.json'
+                    // def jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
 
-                    // Loop through each item in the JSON array
-                    jsonData.each { item ->
-                        scheduledAMICreations << new scheduledBuild(environment: item.environment,  instanceNames: item.instanceNames, ticketNumber: item.ticketNumber, mode: item.mode, date: item.date, time: item.time, scheduledBuildId: item.scheduledBuildId)
+                    // // Loop through each item in the JSON array
+                    // jsonData.each { item ->
+                    //     scheduledAMICreations << new scheduledBuild(environment: item.environment,  instanceNames: item.instanceNames, ticketNumber: item.ticketNumber, mode: item.mode, date: item.date, time: item.time, scheduledBuildId: item.scheduledBuildId)
+                    // }
+
+                    def queueFilePath = 'C:\\code\\AMICreationQueueService\\Test.json'
+
+                    def existingContent = new File(queueFilePath).text
+                    def jsonSlurperClassic = new JsonSlurperClassic()
+
+                    // Try to parse the existing content, handle potential parsing errors
+                    try {
+                        scheduledAMICreations = jsonSlurperClassic.parseText(existingContent)
+                    } catch (Exception e) {
+
+                        error ("Unable to parse json file. Please check for syntax errors.")
+                        
                     }
                     
                 }

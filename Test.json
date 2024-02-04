@@ -1,29 +1,79 @@
 [
     {
-        "environment": "rod_aws",
-        "instanceNames": "TESTEC2",
-        "ticketNumber": "TESTTICKET",
-        "mode": "Adhoc",
-        "date": "01/31/2024",
-        "time": "12:46",
-        "scheduledBuildId": "TESTID"
-    }, 
-    {
-        "environment": "rod_aws_2",
-        "instanceNames": "TESTEC2_2",
-        "ticketNumber": "TESTTICKET_2",
-        "mode": "Adhoc",
-        "date": "01/31/2024",
-        "time": "17:46",
-        "scheduledBuildId": "TESTID_2"
+        "Account": "554249804926",
+        "InstanceNames": "APSPTEST1,APSPTEST2",
+        "ScheduledBuildId": "304cba7a-18f9-4d8a-aad1-8197e11772b9",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "Region": "ap-southeast-1",
+        "Time": "14:00",
+        "InstanceIds": "i-00474431515277521,i-0b9116af3b684e4b9",
+        "Date": "02/02/2024"
     },
     {
-        "environment": "rod_aws_3",
-        "instanceNames": "TESTEC2_3",
-        "ticketNumber": "TESTTICKET_3",
-        "mode": "Adhoc",
-        "date": "01/31/2024",
-        "time": "17:46",
-        "scheduledBuildId": "TESTID_3"
+        "Account": "554249804926",
+        "InstanceNames": "APSPTEST1,APSPTEST2",
+        "ScheduledBuildId": "4ac1d4e6-9f2c-486a-b077-d3b8e159b70a",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "Region": "ap-southeast-1",
+        "Time": "14:00",
+        "InstanceIds": "i-00474431515277521,i-0b9116af3b684e4b9",
+        "Date": "02/02/2024"
+    },
+    {
+        "Account": "554249804926",
+        "InstanceNames": "APSPTEST1,APSPTEST2",
+        "ScheduledBuildId": "e44e3317-1304-4272-bc55-8c58d458af03",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "Region": "ap-southeast-1",
+        "Time": "14:00",
+        "InstanceIds": "i-00474431515277521,i-0b9116af3b684e4b9",
+        "Date": "02/02/2024"
+    },
+    {
+        "Account": "554249804926",
+        "InstanceNames": "APSPTEST1,APSPTEST2",
+        "ScheduledBuildId": "8c3de25c-f71b-47f1-9203-f90c34e56890",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "Region": "ap-southeast-1",
+        "Time": "14:00",
+        "InstanceIds": "i-00474431515277521,i-0b9116af3b684e4b9",
+        "Date": "02/02/2024"
+    },
+    {
+        "Account": "554249804926",
+        "InstanceNames": "APSPTEST1,APSPTEST2",
+        "ScheduledBuildId": "dba9ec55-950b-46db-8900-1cd622bd04e2",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "Region": "ap-southeast-1",
+        "Time": "14:00",
+        "InstanceIds": "i-00474431515277521,i-0b9116af3b684e4b9",
+        "Date": "02/02/2024"
+    },
+    {
+        "Account": "554249804926",
+        "InstanceNames": "APSPTEST1,APSPTEST2",
+        "ScheduledBuildId": "66ef2820-e49e-49df-8387-42765e4d4dce",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "Region": "ap-southeast-1",
+        "Time": "14:00",
+        "InstanceIds": "i-00474431515277521,i-0b9116af3b684e4b9",
+        "Date": "02/02/2024"
+    },
+    {
+        "Account": "554249804926",
+        "Region": "ap-southeast-1",
+        "InstanceNames": "APSPTEST1,APSPTEST2",
+        "InstanceIds": "i-03aeccd063ca331b1,i-02e6a9fc6d67e05e9",
+        "TicketNumber": "SCTASK00000000",
+        "Date": "02/05/2024",
+        "Time": "14:00",
+        "Mode": "Express",
+        "ScheduledBuildId": "21f3adcc-54bc-4534-af5f-6d0b52faddf2"
     }
 ]
