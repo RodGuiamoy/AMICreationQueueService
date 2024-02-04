@@ -76,7 +76,7 @@ pipeline {
                     
                     scheduledAMICreations.each { item ->
                         
-                        executionDateTimeStr = item.date + ' ' + item.time
+                        executionDateTimeStr = item.Date + ' ' + item.Time
 
                         Date executionDateTime = null
 
@@ -99,7 +99,7 @@ pipeline {
                         // Convert the difference to seconds
                         int secondsFromNow = differenceInMillis / 1000
 
-                        item.secondsFromNow = secondsFromNow
+                        item.SecondsFromNow = secondsFromNow
 
                         if (secondsFromNow <= 0 || secondsFromNow < 900) {
 
@@ -117,14 +117,15 @@ pipeline {
                     def upcomingAMICreationsStr = "Upcoming builds:\n"
                     upcomingAMICreationsStr += "-----------------------\n"
                     upcomingAMICreations.each { item ->
-                        upcomingAMICreationsStr += "Environment: ${item.environment}\n"
-                        upcomingAMICreationsStr += "Instance Names: ${item.instanceNames}\n"
-                        upcomingAMICreationsStr += "Ticket Number: ${item.ticketNumber}\n"
-                        upcomingAMICreationsStr += "Mode: ${item.mode}\n"
-                        upcomingAMICreationsStr += "Date: ${item.date}\n"
-                        upcomingAMICreationsStr += "Time: ${item.time}\n"
-                        upcomingAMICreationsStr += "SecondsFromNow: ${item.secondsFromNow}\n"
                         upcomingAMICreationsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
+                        upcomingAMICreationsStr += "Account: ${item.Account}\n"
+                        upcomingAMICreationsStr += "Instance Names: ${item.InstanceNames}\n"
+                        upcomingAMICreationsStr += "Region: ${item.Region}\n"
+                        upcomingAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
+                        upcomingAMICreationsStr += "Mode: ${item.Mode}\n"
+                        upcomingAMICreationsStr += "Date: ${item.Date}\n"
+                        upcomingAMICreationsStr += "Time: ${item.Time}\n"
+                        upcomingAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
                         upcomingAMICreationsStr += "-----------------------\n"
                     }
 
