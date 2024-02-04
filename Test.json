@@ -9,16 +9,5 @@
         "Time": "07:04",
         "InstanceIDs": "i-03aeccd063ca331b1,i-02e6a9fc6d67e05e9",
         "Date": "02/05/2024"
-    },
-    {
-        "Account": "554249804926",
-        "Region": "ap-southeast-1",
-        "InstanceNames": "APSPTEST1,APSPTEST2",
-        "InstanceIDs": "i-03aeccd063ca331b1,i-02e6a9fc6d67e05e9",
-        "TicketNumber": "SCTASK00000000",
-        "Date": "02/05/2024",
-        "Time": "07:13",
-        "Mode": "Express",
-        "ScheduledBuildId": "0ec8f46c-46e1-40e6-ae01-8f65a0daa06a"
     }
 ]
