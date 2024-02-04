@@ -43,7 +43,7 @@ pipeline {
 
     triggers {
             // This cron syntax triggers the job every 15 minutes
-            cron('*/15 * * * *')
+            cron('*/1 * * * *')
         }
 
     stages {
