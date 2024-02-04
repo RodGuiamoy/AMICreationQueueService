@@ -12,7 +12,7 @@ class scheduledBuild {
     String scheduledBuildId
 }
 
-def queueAMICreation(environment, instanceNames, ticketNumber, mode, scheduledBuildId, date, time, secondsFromNow) {
+def queueAMICreation(scheduledBuildId, account, instanceNames, region, ticketNumber, mode,  date, time, secondsFromNow) {
     // def job = Hudson.instance.getJob('AMICreationPipeline')
     def job = Jenkins.instance.getItemByFullName('AMICreationPipeline')
 
@@ -21,8 +21,9 @@ def queueAMICreation(environment, instanceNames, ticketNumber, mode, scheduledBu
     }
 
     def params = [
-        new StringParameterValue('Environment', environment),
+        new StringParameterValue('Account', account),
         new StringParameterValue('InstanceNames', instanceNames),
+        new StringParameterValue('Region', region),
         new StringParameterValue('TicketNumber', ticketNumber),
         new StringParameterValue('Mode', mode),
         new StringParameterValue('Date', date),
@@ -43,15 +44,6 @@ pipeline {
         stage('ReadJSON') {
             steps {
                 script {
-                    // Assuming the JSON file is named 'data.json' and located in the workspace
-                    //def jsonFile = readFile 'Test.json'
-                    // def jsonFile = readFile 'C:\\code\\AMICreationQueueService\\Test.json'
-                    // def jsonData = new groovy.json.JsonSlurper().parseText(jsonFile)
-
-                    // // Loop through each item in the JSON array
-                    // jsonData.each { item ->
-                    //     scheduledAMICreations << new scheduledBuild(environment: item.environment,  instanceNames: item.instanceNames, ticketNumber: item.ticketNumber, mode: item.mode, date: item.date, time: item.time, scheduledBuildId: item.scheduledBuildId)
-                    // }
 
                     def queueFilePath = 'C:\\code\\AMICreationQueueService\\Test.json'
 
@@ -117,7 +109,7 @@ pipeline {
                     def upcomingAMICreationsStr = "Upcoming builds:\n"
                     upcomingAMICreationsStr += "-----------------------\n"
                     upcomingAMICreations.each { item ->
-                        upcomingAMICreationsStr += "Scheduled Build Id: ${item.scheduledBuildId}\n"
+                        upcomingAMICreationsStr += "Scheduled Build Id: ${item.ScheduledBuildId}\n"
                         upcomingAMICreationsStr += "Account: ${item.Account}\n"
                         upcomingAMICreationsStr += "Instance Names: ${item.InstanceNames}\n"
                         upcomingAMICreationsStr += "Region: ${item.Region}\n"
@@ -138,7 +130,7 @@ pipeline {
                 script {
                     upcomingAMICreations.each { item ->
                         // Example usage
-                        queueAMICreation(item.environment, item.instanceNames, item.ticketNumber, item.mode, item.scheduledBuildId, item.date, item.time, item.secondsFromNow)
+                        queueAMICreation(item.Account, item.InstanceNames, item.Regfions, item.TicketNumber, item.Mode, item.ScheduledBuildId, item.Date, item.Time, item.SecondsFromNow)
                     }
                 }
             }
