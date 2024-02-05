@@ -56,6 +56,12 @@ pipeline {
                     def existingContent = new File(queueFilePath).text
                     def jsonSlurperClassic = new JsonSlurperClassic()
 
+                    if (existingContent.length() == 0) {
+                        unstable("The JSON file is empty. Exiting the pipeline.")
+                        currentBuild.result = 'SUCCESS'
+                        return
+                    }
+
                     // Try to parse the existing content, handle potential parsing errors
                     try {
                         scheduledAMICreations = jsonSlurperClassic.parseText(existingContent)
