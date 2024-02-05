@@ -57,18 +57,14 @@ pipeline {
                     def jsonSlurperClassic = new JsonSlurperClassic()
 
                     if (existingContent.length() == 0) {
-                        unstable("The JSON file is empty. Exiting the pipeline.")
-                        currentBuild.result = 'SUCCESS'
-                        return
+                        error("The queue file is empty. Exiting the pipeline.")
                     }
 
                     // Try to parse the existing content, handle potential parsing errors
                     try {
                         scheduledAMICreations = jsonSlurperClassic.parseText(existingContent)
                     } catch (Exception e) {
-
                         error ("Unable to parse json file. Please check for syntax errors.")
-                        
                     }
                     
                 }
