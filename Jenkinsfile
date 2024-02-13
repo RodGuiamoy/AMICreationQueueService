@@ -77,86 +77,90 @@ pipeline {
                     
                     scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'PendingCreation' }
 
-                    def scheduledAMICreationsStr = "Scheduled builds:\n"
-                    scheduledAMICreationsStr += "-----------------------\n"
+                    // def scheduledAMICreationsStr = "Scheduled builds:\n"
+                    // scheduledAMICreationsStr += "-----------------------\n"
                     scheduledAMICreations.each { item ->
+
+                        //     String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
+                        //     String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
+
+                        //     scheduledAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
+                        //     scheduledAMICreationsStr += "Account: ${item.Account}\n"
+                        //     scheduledAMICreationsStr += "Instance Names: ${instanceNames}\n"
+                        //     scheduledAMICreationsStr += "Instance IDs: ${instanceIds}\n"
+                        //     scheduledAMICreationsStr += "Region: ${item.Region}\n"
+                        //     scheduledAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
+                        //     scheduledAMICreationsStr += "Mode: ${item.Mode}\n"
+                        //     scheduledAMICreationsStr += "Date: ${item.Date}\n"
+                        //     scheduledAMICreationsStr += "Time: ${item.Time}\n"
+                        //     scheduledAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
+                        //     scheduledAMICreationsStr += "-----------------------\n"
+                        // }
+
+                        // echo "${scheduledAMICreationsStr}"
+                        
+                        executionDateTimeStr = item.Date + ' ' + item.Time
+
+                        Date executionDateTime = null
+
+                        try {
+                            // Parse the future date and time
+                            def dateFormat = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm")
+                            executionDateTime = dateFormat.parse(executionDateTimeStr)
+                        }
+                        catch (ex) {
+                            // Handle the error without failing the build
+                            unstable("Unable to parse DateTime ${executionDateTimeStr}.")
+                        }
+                        
+                        // Get the current date and time
+                        Date currentDate = new Date()
+
+                        // Calculate the difference in milliseconds
+                        long differenceInMillis = executionDateTime.time - currentDate.time
+
+                        // Convert the difference to seconds
+                        int secondsFromNow = differenceInMillis / 1000
+
+                        item.SecondsFromNow = secondsFromNow
+
+                        if (secondsFromNow <= 0 || secondsFromNow < 900) {
+
+                            upcomingAMICreations << item
+
+                        }
+                    }
+
+                    if (upcomingAMICreations.isEmpty()) {
+                         echo 'No upcoming builds identified.'
+                        currentBuild.result = 'SUCCESS'
+                        return
+                    }
+
+                    def upcomingAMICreationsStr = "Upcoming AMI Creations:\n"
+                    //scheduledAMICreationsStr += "-----------------------\n"
+                    upcomingAMICreations.each { item ->
 
                         String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
                         String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
 
-                        scheduledAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
-                        scheduledAMICreationsStr += "Account: ${item.Account}\n"
-                        scheduledAMICreationsStr += "Instance Names: ${instanceNames}\n"
-                        scheduledAMICreationsStr += "Instance IDs: ${instanceIds}\n"
-                        scheduledAMICreationsStr += "Region: ${item.Region}\n"
-                        scheduledAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
-                        scheduledAMICreationsStr += "Mode: ${item.Mode}\n"
-                        scheduledAMICreationsStr += "Date: ${item.Date}\n"
-                        scheduledAMICreationsStr += "Time: ${item.Time}\n"
-                        scheduledAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
-                        scheduledAMICreationsStr += "-----------------------\n"
+                        upcomingAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
+                        upcomingAMICreationsStr += "Account: ${item.Account}\n"
+                        upcomingAMICreationsStr += "Instance Names: ${instanceNames}\n"
+                        upcomingAMICreationsStr += "Instance IDs: ${instanceIds}\n"
+                        upcomingAMICreationsStr += "Region: ${item.Region}\n"
+                        upcomingAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
+                        upcomingAMICreationsStr += "Mode: ${item.Mode}\n"
+                        upcomingAMICreationsStr += "Date: ${item.Date}\n"
+                        upcomingAMICreationsStr += "Time: ${item.Time}\n"
+                        upcomingAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
+                        upcomingAMICreationsStr += "-----------------------\n"
                     }
 
-                    echo "${scheduledAMICreationsStr}"
-                        
-                    //     executionDateTimeStr = item.Date + ' ' + item.Time
-
-                    //     Date executionDateTime = null
-
-                    //     try {
-                    //         // Parse the future date and time
-                    //         def dateFormat = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm")
-                    //         executionDateTime = dateFormat.parse(executionDateTimeStr)
-                    //     }
-                    //     catch (ex) {
-                    //         // Handle the error without failing the build
-                    //         unstable("Unable to parse DateTime ${executionDateTimeStr}.")
-                    //     }
-                        
-                    //     // Get the current date and time
-                    //     Date currentDate = new Date()
-
-                    //     // Calculate the difference in milliseconds
-                    //     long differenceInMillis = executionDateTime.time - currentDate.time
-
-                    //     // Convert the difference to seconds
-                    //     int secondsFromNow = differenceInMillis / 1000
-
-                    //     item.SecondsFromNow = secondsFromNow
-
-                    //     if (secondsFromNow <= 0 || secondsFromNow < 900) {
-
-                    //         upcomingAMICreations << item
-
-                    //     }
-                    // }
-
-                    // if (upcomingAMICreations.isEmpty()) {
-                    //      echo 'No upcoming builds identified.'
-                    //     currentBuild.result = 'SUCCESS'
-                    //     return
-                    // }
-
-                    // def upcomingAMICreationsStr = "Upcoming builds:\n"
-                    // upcomingAMICreationsStr += "-----------------------\n"
-                    // upcomingAMICreations.each { item ->
-                    //     upcomingAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
-                    //     upcomingAMICreationsStr += "Account: ${item.Account}\n"
-                    //     // upcomingAMICreationsStr += "Instance Names: ${item.InstanceNames}\n"
-                    //     // upcomingAMICreationsStr += "Instance IDs: ${item.InstanceIDs}\n"
-                    //     upcomingAMICreationsStr += "Region: ${item.Region}\n"
-                    //     upcomingAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
-                    //     upcomingAMICreationsStr += "Mode: ${item.Mode}\n"
-                    //     upcomingAMICreationsStr += "Date: ${item.Date}\n"
-                    //     upcomingAMICreationsStr += "Time: ${item.Time}\n"
-                    //     upcomingAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
-                    //     upcomingAMICreationsStr += "-----------------------\n"
-                    // }
-
-                    // echo "${upcomingAMICreationsStr}"
-                    }
+                    echo "${upcomingAMICreationsStr}"
                 }
             }
+        }
             // stage('QueueAMICreationRequestsForExecution') {
             //     steps {
             //         script {
