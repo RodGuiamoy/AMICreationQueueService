@@ -138,7 +138,7 @@ pipeline {
                     }
 
                     def upcomingAMICreationsStr = "Upcoming AMI Creations:\n"
-                    //scheduledAMICreationsStr += "-----------------------\n"
+                    upcomingAMICreationsStr += "-----------------------\n"
                     upcomingAMICreations.each { item ->
 
                         String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
