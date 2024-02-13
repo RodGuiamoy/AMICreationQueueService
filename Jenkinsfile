@@ -76,6 +76,9 @@ pipeline {
                 script {
                     
                     scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'PendingCreation' }
+
+                    def instanceNames = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceName }.join(',')
+                    def instanceIds = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceId }.join(',')
                     // scheduledAMICreations.each { item ->
 
                     def scheduledAMICreationsStr = "Scheduled builds:\n"
@@ -83,8 +86,8 @@ pipeline {
                     scheduledAMICreations.each { item ->
                         scheduledAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
                         scheduledAMICreationsStr += "Account: ${item.Account}\n"
-                        // upcomingAMICreationsStr += "Instance Names: ${item.InstanceNames}\n"
-                        // upcomingAMICreationsStr += "Instance IDs: ${item.InstanceIDs}\n"
+                        scheduledAMICreationsStr += "Instance Names: ${instanceNames}\n"
+                        scheduledAMICreationsStr += "Instance IDs: ${instanceIds}\n"
                         scheduledAMICreationsStr += "Region: ${item.Region}\n"
                         scheduledAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
                         scheduledAMICreationsStr += "Mode: ${item.Mode}\n"
