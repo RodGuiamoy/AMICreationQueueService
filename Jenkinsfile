@@ -81,8 +81,8 @@ pipeline {
                     scheduledAMICreationsStr += "-----------------------\n"
                     scheduledAMICreations.each { item ->
 
-                        def instanceNames = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceName }.join(',')
-                        def instanceIds = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceId }.join(',')
+                        String instanceNames = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceName }.join(',')
+                        String instanceIds = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceId }.join(',')
 
                         scheduledAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
                         scheduledAMICreationsStr += "Account: ${item.Account}\n"
