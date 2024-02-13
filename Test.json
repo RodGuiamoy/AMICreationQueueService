@@ -1,0 +1,64 @@
+[
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "d7ba8d71-a19b-416a-ab0f-7bdf2415ae30",
+        "Account": "554249804926",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02132024_1211_74e",
+                "amiId": "ami-0b6b8717e1e718611",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02132024_1212_707",
+                "amiId": "ami-0263ff6f56097cf85",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Region": "ap-southeast-1"
+    },
+    {
+        "AmiCreationRequestId": "94ef7398-6a14-41fe-90e9-1455f0080f0b",
+        "Status": "PendingCreation",
+        "Account": "554249804926",
+        "Region": "ap-southeast-1",
+        "AMIs": [
+            {
+                "instanceDetails": {
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1",
+                    "instanceId": "i-0bef2a0f24b878fe8"
+                },
+                "status": "",
+                "amiId": "",
+                "amiName": ""
+            },
+            {
+                "instanceDetails": {
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1",
+                    "instanceId": "i-031b9d496414954e0"
+                },
+                "status": "",
+                "amiId": "",
+                "amiName": ""
+            }
+        ],
+        "TicketNumber": "SCTASK00000000",
+        "Date": "02/24/2024",
+        "Time": "14:00",
+        "Mode": "Express"
+    }
+]
