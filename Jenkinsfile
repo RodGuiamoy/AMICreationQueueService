@@ -77,8 +77,8 @@ pipeline {
                     
                     scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'PendingCreation' }
 
-                    def instanceNames = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceName }.join(', ')
-                    def instanceIds = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceId }.join(', ')
+                    def instanceNames = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceName }.join(',').toString()
+                    def instanceIds = scheduledAMICreations.AMIs.collect { it.instanceDetails.instanceId }.join(',').toString()
                     // scheduledAMICreations.each { item ->
 
                     def scheduledAMICreationsStr = "Scheduled builds:\n"
