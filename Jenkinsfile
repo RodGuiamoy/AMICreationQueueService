@@ -76,7 +76,7 @@ pipeline {
                 script {
                     
                     scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'PendingCreation' }
-                    scheduledAMICreations.each { item ->
+                    // scheduledAMICreations.each { item ->
 
                     def scheduledAMICreationsStr = "Scheduled builds:\n"
                     scheduledAMICreationsStr += "-----------------------\n"
