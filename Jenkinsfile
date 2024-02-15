@@ -75,7 +75,7 @@ pipeline {
             steps {
                 script {
                     
-                    scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'PendingCreation' }
+                    scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'Scheduled' }
 
                     // def scheduledAMICreationsStr = "Scheduled builds:\n"
                     // scheduledAMICreationsStr += "-----------------------\n"
