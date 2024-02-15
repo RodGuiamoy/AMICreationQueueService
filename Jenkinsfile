@@ -165,8 +165,11 @@ pipeline {
             steps {
                 script {
                     upcomingAMICreations.each { item ->
-                        // Example usage
-                        queueAMICreation(item.AmiCreationRequestId, item.Account, item.InstanceNames, item.InstanceIDs, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
+
+                        String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
+                        String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
+
+                        queueAMICreation(item.AmiCreationRequestId, item.Account, instanceNames, instanceIds, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
                     }
                 }
             }
