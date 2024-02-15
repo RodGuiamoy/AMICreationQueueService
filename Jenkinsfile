@@ -161,16 +161,16 @@ pipeline {
                 }
             }
         }
-            // stage('QueueAMICreationRequestsForExecution') {
-            //     steps {
-            //         script {
-            //             upcomingAMICreations.each { item ->
-            //                 // Example usage
-            //                 queueAMICreation(item.AmiCreationRequestId, item.Account, item.InstanceNames, item.InstanceIDs, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
-            //             }
-            //         }
-            //     }
-            // }
+        stage('QueueAMICreationRequestsForExecution') {
+            steps {
+                script {
+                    upcomingAMICreations.each { item ->
+                        // Example usage
+                        queueAMICreation(item.AmiCreationRequestId, item.Account, item.InstanceNames, item.InstanceIDs, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
+                    }
+                }
+            }
+        }
     }
 }
 
