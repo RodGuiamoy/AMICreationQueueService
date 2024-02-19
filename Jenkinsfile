@@ -227,9 +227,10 @@ pipeline {
                                         amiDBRecord.status = image.State
                                     }
 
-                                    def amisStillOnPending = AMIs.find { it.status != "available" }
+                                    def amisStillOnPending = AMIs.findAll { it.status != "available" }
                                     if (amisStillOnPending.isEmpty()) {
                                         echo "AMI Creation Request ID ${amiCreationRequestId} now completed."
+                                        AMICreationRequest.status = "Completed"
                                     }
                                 }
                             }
