@@ -180,10 +180,10 @@ pipeline {
                     def requestsWithPendingAMIs = amiCreationRequestDB.findAll { it.Status == 'AwaitingAvailability' }
 
                     // Group by a composite key of 'category' and 'value' range
-                    def groupedByAccountAndRegion = requestsWithPendingAMIs.groupBy { item ->
+                    def groupedByAccountAndRegion = requestsWithPendingAMIs.groupBy {
                         // Creating a tuple (as a List) of 'category' and a custom range for 'value'
                         // For simplicity, categorizing 'value' into '<=30' and '>30'
-                        [item.Account, item.Region]
+                        [it.Account, it.Region]
                     }
 
                     // Print the result
