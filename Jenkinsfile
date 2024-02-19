@@ -229,7 +229,7 @@ pipeline {
 
                                     def amisStillOnPending = AMIs.findAll { it.status != "available" }
                                     if (amisStillOnPending.isEmpty()) {
-                                        echo "AMI Creation Request ID ${amiCreationRequestId} now completed."
+                                        echo "AMI Creation Request ID ${amiCreationRequestId} complete."
                                         AMICreationRequest.status = "Completed"
                                     }
                                 }
