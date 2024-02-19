@@ -197,6 +197,7 @@ pipeline {
                             withAWS(role: role, region: region, roleAccount: account, duration: '3600' ){
                                 value.each { AMICreationRequest ->
                                     def AMIs = AMICreationRequest.AMIs
+                                    def amiCreationRequestId = AMICreationRequest.AMICreationRequest
 
                                     def amiIDsStr = AMIs.collect { it.amiId }.join(' ')
 
@@ -214,10 +215,16 @@ pipeline {
                                     def jsonSlurper = new groovy.json.JsonSlurper()
                                     def cliOutputJson = jsonSlurper.parseText(cliOutput)
 
-                                    echo "${cliOutputJson}"
-                                    // }
+                                    // echo "${cliOutputJson}"
+                                     // Check if 'Reservations' is empty
+                                    if (cliOutputJson.Images.isEmpty()) {
+                                        unstable("Unable to retrieve AMI status for AMI Creation Request ID ${amiCreationRequestId}.")
+                                        return
+                                    }
 
-                                    
+                                    cliOutputJson.Images.each { images ->
+                                        echo "${images.ImageId} ${images.Status}"
+                                    }
                                 }
                             }
                         }
