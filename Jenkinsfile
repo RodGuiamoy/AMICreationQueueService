@@ -201,7 +201,7 @@ pipeline {
                                 value.each { AMICreationRequest ->
                                     
                                     def AMIs = AMICreationRequest.AMIs
-                                    def amiCreationRequestId = AMICreationRequest.AMICreationRequestId
+                                    def amiCreationRequestId = AMICreationRequest.AmiCreationRequestId
                                     def amiIDsStr = AMIs.collect { it.amiId }.join(' ')
                                     def awsCliCommand = "aws ec2 describe-images --image-ids ${amiIDsStr} --output json"
 
