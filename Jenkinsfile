@@ -223,7 +223,7 @@ pipeline {
                                     }
 
                                     cliOutputJson.Images.each { images ->
-                                        echo "${images.ImageId} ${images.Status}"
+                                        echo "${images.ImageId} ${images.State}"
                                     }
                                 }
                             }
