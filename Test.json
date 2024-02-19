@@ -27,7 +27,8 @@
                 "status": "available"
             }
         ],
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -57,7 +58,8 @@
                 "status": "available"
             }
         ],
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -88,7 +90,8 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -119,7 +122,8 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -151,7 +155,8 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -183,7 +188,8 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -215,7 +221,8 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "QueuedForExecution",
@@ -283,7 +290,8 @@
         "Environment": "rod_aws",
         "Region": "ap-southeast-1",
         "Time": "06:51",
-        "Date": "02/19/2024"
+        "Date": "02/19/2024",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -317,7 +325,8 @@
         "Environment": "rod_aws",
         "Region": "ap-southeast-1",
         "Time": "07:08",
-        "Date": "02/19/2024"
+        "Date": "02/19/2024",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -349,7 +358,8 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -381,7 +391,8 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     },
     {
         "Status": "AwaitingAvailability",
@@ -413,6 +424,7 @@
             }
         ],
         "Environment": "rod_aws",
-        "Region": "ap-southeast-1"
+        "Region": "ap-southeast-1",
+        "status": "Completed"
     }
 ]
