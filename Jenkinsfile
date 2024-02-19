@@ -188,13 +188,40 @@ pipeline {
 
                     // Print the result
                     groupedByAccountAndRegion.each { key, value ->
-                        // println("Key: $key, Values: $value")
-                        accountNumber = key[0]
-                        region = key[1]
 
-                        value.each { AMICreationRequest ->
-                            echo "${AMICreationRequest.AmiCreationRequestId}"
+                        def account = key[0]
+                        def region = key[1]
+                        def role = 'AMICreationRole'
+
+                        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'rod_aws']]) {
+                            withAWS(role: role, region: region, roleAccount: account, duration: '3600' ){
+                                value.each { AMICreationRequest ->
+                                    def AMIs = AMICreationRequest.AMIs
+
+                                    AMIs.each { AMI ->
+                                        def amiID = AMI.amiId
+                                        def awsCliCommand = "aws ec2 describe-images --image-ids ${amiID} --query 'Images[*].State' --output text"
+
+                                        // Executes the AWS CLI command and does some post-processing.
+                                        // The output includes the command at the top and can't be parsed so we have to drop the first line
+                                        def cliOutput = bat(script: awsCliCommand, returnStdout: true).trim()
+                                        cliOutput = cliOutput.readLines().drop(1).join("\n")
+
+                                        // Parse the CLI output as JSON
+                                        def jsonSlurper = new groovy.json.JsonSlurper()
+                                        def cliOutputJson = jsonSlurper.parseText(cliOutput)
+
+                                        echo "${cliOutputJson}"
+                                    }
+
+                                    
+                                }
+                            }
                         }
+
+                        // value.each { AMICreationRequest ->
+                        //     echo "${AMICreationRequest.AmiCreationRequestId}"
+                        // }
                     }
 
                     // def requestsGroupedByAccount = requestsWithPendingAMIs.groupBy { it.Account, it.Region }
