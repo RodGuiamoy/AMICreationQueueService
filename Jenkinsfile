@@ -179,11 +179,23 @@ pipeline {
                 script {
                     def requestsWithPendingAMIs = amiCreationRequestDB.findAll { it.Status == 'AwaitingAvailability' }
 
-                    def requestsGroupedByAccount = requestsWithPendingAMIs.groupBy { it.Account, it.Region }
-                    
-                    requestsGroupedByAccount.each { request ->
-                        echo "${request}"
+                    // Group by a composite key of 'category' and 'value' range
+                    def groupedByAccountAndRegion = requestsWithPendingAMIs.groupBy { it ->
+                        // Creating a tuple (as a List) of 'category' and a custom range for 'value'
+                        // For simplicity, categorizing 'value' into '<=30' and '>30'
+                        [it.Account, it.Region]
                     }
+
+                    // Print the result
+                    groupedByCategoryAndValueRange.each { key, value ->
+                        println("Key: $key, Values: $value")
+                    }
+
+                    // def requestsGroupedByAccount = requestsWithPendingAMIs.groupBy { it.Account, it.Region }
+                    
+                    // requestsGroupedByAccount.each { request ->
+                    //     echo "${request}"
+                    // }
 
                     // def requests = validInstances.groupBy { it.region }
                     // requestsWithPendingAMIs.each { request ->
