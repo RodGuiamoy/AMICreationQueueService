@@ -187,7 +187,7 @@ pipeline {
                     }
 
                     // Print the result
-                    groupedByCategoryAndValueRange.each { key, value ->
+                    groupedByAccountAndRegion.each { key, value ->
                         println("Key: $key, Values: $value")
                     }
 
