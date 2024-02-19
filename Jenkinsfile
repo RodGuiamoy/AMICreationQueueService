@@ -179,7 +179,9 @@ pipeline {
                 script {
                     def requestsWithPendingAMIs = amiCreationRequestDB.findAll { it.Status == 'AwaitingAvailability' }
 
-                    requestsWithPendingAMIs.each { request ->
+                    def requestsGroupedByAccount = requestsWithPendingAMIs.groupBy { it.Account }
+                    
+                    requestsGroupedByAccount.each { request ->
                         echo "${request}"
                     }
 
