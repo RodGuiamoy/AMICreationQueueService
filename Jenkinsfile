@@ -189,7 +189,12 @@ pipeline {
                     // Print the result
                     groupedByAccountAndRegion.each { key, value ->
                         // println("Key: $key, Values: $value")
-                        echo "${key[0]}"
+                        accountNumber = key[0]
+                        region = key[1]
+
+                        value.each { AMICreationRequest ->
+                            echo "${AMICreationRequest.AmiCreationRequestId}"
+                        }
                     }
 
                     // def requestsGroupedByAccount = requestsWithPendingAMIs.groupBy { it.Account, it.Region }
