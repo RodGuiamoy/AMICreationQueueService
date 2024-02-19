@@ -224,7 +224,7 @@ pipeline {
                                     cliOutputJson.Images.each { image ->
                                         echo "${image.ImageId} ${image.State}"
                                         def amiDBRecord = AMIs.find { it.amiId == image.ImageId }
-                                        amiDBRecord.status = ${image.State}
+                                        amiDBRecord.status = image.State
                                     }
                                 }
                             }
