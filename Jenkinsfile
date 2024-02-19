@@ -212,7 +212,7 @@ pipeline {
                                         def jsonSlurper = new groovy.json.JsonSlurper()
                                         def cliOutputJson = jsonSlurper.parseText(cliOutput)
 
-                                        echo "${cliOutput}"
+                                        echo "${cliOutputJson}"
                                     }
 
                                     
