@@ -205,13 +205,14 @@ pipeline {
                                         // Executes the AWS CLI command and does some post-processing.
                                         // The output includes the command at the top and can't be parsed so we have to drop the first line
                                         def cliOutput = bat(script: awsCliCommand, returnStdout: true).trim()
-                                        cliOutput = cliOutput.readLines().drop(1).join("\n")
 
-                                        // Parse the CLI output as JSON
-                                        def jsonSlurper = new groovy.json.JsonSlurper()
-                                        def cliOutputJson = jsonSlurper.parseText(cliOutput)
+                                        // cliOutput = cliOutput.readLines().drop(1).join("\n")
 
-                                        echo "${cliOutputJson}"
+                                        // // Parse the CLI output as JSON
+                                        // def jsonSlurper = new groovy.json.JsonSlurper()
+                                        // def cliOutputJson = jsonSlurper.parseText(cliOutput)
+
+                                        echo "${cliOutput}"
                                     }
 
                                     
