@@ -200,7 +200,7 @@ pipeline {
 
                                     AMIs.each { AMI ->
                                         def amiID = AMI.amiId
-                                        def awsCliCommand = "aws ec2 describe-images --image-ids ${amiID} --query 'Images[*].State' --output text"
+                                        def awsCliCommand = "aws ec2 describe-images --image-ids ${amiID} --query 'Images[*].State' --output json"
 
                                         // Executes the AWS CLI command and does some post-processing.
                                         // The output includes the command at the top and can't be parsed so we have to drop the first line
