@@ -106,7 +106,7 @@ void sendEmailNotification (Object AMICreationRequest) {
 </head>
 <body>
 
-<p class="status-message">AMIs now available. Reference ticket: ${AMICreationRequest.TicketNumber}</p>
+<p class="status-message">AMIs are now available.</p>
 
 
 <table>
@@ -149,7 +149,7 @@ void sendEmailNotification (Object AMICreationRequest) {
 
                         // Send the email using the email-ext plugin, including the table
                         emailext(
-                            subject: "AMI Creation Report",
+                            subject: "${AMICreationRequest.TicketNumber} - AMI Creation Report",
                             body: body,
                             mimeType: 'text/html',
                             to: 'recipient@example.com'
