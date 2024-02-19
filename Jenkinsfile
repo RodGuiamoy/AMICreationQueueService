@@ -198,22 +198,24 @@ pipeline {
                                 value.each { AMICreationRequest ->
                                     def AMIs = AMICreationRequest.AMIs
 
-                                    AMIs.each { AMI ->
-                                        def amiID = AMI.amiId
-                                        def awsCliCommand = "aws ec2 describe-images --image-ids ${amiID} --output json"
+                                    def amiIDsStr = AMIs.collect { it.amiId }.join(' ')
 
-                                        // Executes the AWS CLI command and does some post-processing.
-                                        // The output includes the command at the top and can't be parsed so we have to drop the first line
-                                        def cliOutput = bat(script: awsCliCommand, returnStdout: true).trim()
+                                    // AMIs.each { AMI ->
+                                    // def amiID = AMI.amiId
+                                    def awsCliCommand = "aws ec2 describe-images --image-ids ${amiIDsStr} --output json"
 
-                                        cliOutput = cliOutput.readLines().drop(1).join("\n")
+                                    // Executes the AWS CLI command and does some post-processing.
+                                    // The output includes the command at the top and can't be parsed so we have to drop the first line
+                                    def cliOutput = bat(script: awsCliCommand, returnStdout: true).trim()
 
-                                        // Parse the CLI output as JSON
-                                        def jsonSlurper = new groovy.json.JsonSlurper()
-                                        def cliOutputJson = jsonSlurper.parseText(cliOutput)
+                                    cliOutput = cliOutput.readLines().drop(1).join("\n")
 
-                                        echo "${cliOutputJson}"
-                                    }
+                                    // Parse the CLI output as JSON
+                                    def jsonSlurper = new groovy.json.JsonSlurper()
+                                    def cliOutputJson = jsonSlurper.parseText(cliOutput)
+
+                                    echo "${cliOutputJson}"
+                                    // }
 
                                     
                                 }
