@@ -14,7 +14,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0604_82b",
@@ -24,7 +24,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Region": "ap-southeast-1",
@@ -45,7 +45,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0607_853",
@@ -55,7 +55,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Region": "ap-southeast-1",
@@ -76,7 +76,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0624_f38",
@@ -86,7 +86,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -108,7 +108,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0628_e4b",
@@ -118,7 +118,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -141,7 +141,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0635_fbe",
@@ -151,7 +151,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -174,7 +174,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0642_238",
@@ -184,7 +184,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -207,7 +207,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0644_52a",
@@ -217,7 +217,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -274,7 +274,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0651_f0b",
@@ -284,7 +284,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -309,7 +309,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0708_bb9",
@@ -319,7 +319,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -344,7 +344,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0710_6ce",
@@ -354,7 +354,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -377,7 +377,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0712_860",
@@ -387,7 +387,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
@@ -410,7 +410,7 @@
                     "instanceName": "APSPTEST1",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             },
             {
                 "amiName": "SCTASK00000000_APSPTEST2_02192024_0726_a48",
@@ -420,7 +420,7 @@
                     "instanceName": "APSPTEST2",
                     "region": "ap-southeast-1"
                 },
-                "status": "available"
+                 "status": "pending"
             }
         ],
         "Environment": "rod_aws",
