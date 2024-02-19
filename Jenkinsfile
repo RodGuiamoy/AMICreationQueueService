@@ -38,6 +38,9 @@ def queueAMICreation(amiCreationRequestId, account, instanceNames, instanceIDs, 
 def amiCreationRequestDB = []
 def scheduledAMICreations = []
 def upcomingAMICreations = [] // AMI Creation Requests scheduled less than 15 minutes from now
+def requestsWithPendingAMIs = [] 
+
+def amiCreationRequestDBPath = 'C:\\code\\AMICreationQueueService\\Test.json'
 
 pipeline {
     agent any
@@ -52,9 +55,9 @@ pipeline {
             steps {
                 script {
 
-                    def queueFilePath = 'C:\\code\\AMICreationQueueService\\Test.json'
+                    
 
-                    def existingContent = new File(queueFilePath).text
+                    def existingContent = new File(amiCreationRequestDBPath).text
                     def jsonSlurperClassic = new JsonSlurperClassic()
 
                     if (existingContent.length() == 0) {
@@ -174,10 +177,10 @@ pipeline {
         //         }
         //     }
         // }
-        stage('SyncPendingAMIStatus') {
+        stage('GetPendingAMIStatus') {
             steps {
                 script {
-                    def requestsWithPendingAMIs = amiCreationRequestDB.findAll { it.Status == 'AwaitingAvailability' }
+                    requestsWithPendingAMIs = amiCreationRequestDB.findAll { it.Status == 'AwaitingAvailability' }
 
                     // Group by a composite key of 'category' and 'value' range
                     def groupedByAccountAndRegion = requestsWithPendingAMIs.groupBy {
@@ -196,19 +199,15 @@ pipeline {
                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'rod_aws']]) {
                             withAWS(role: role, region: region, roleAccount: account, duration: '3600' ){
                                 value.each { AMICreationRequest ->
+                                    
                                     def AMIs = AMICreationRequest.AMIs
                                     def amiCreationRequestId = AMICreationRequest.AMICreationRequest
-
                                     def amiIDsStr = AMIs.collect { it.amiId }.join(' ')
-
-                                    // AMIs.each { AMI ->
-                                    // def amiID = AMI.amiId
                                     def awsCliCommand = "aws ec2 describe-images --image-ids ${amiIDsStr} --output json"
 
                                     // Executes the AWS CLI command and does some post-processing.
                                     // The output includes the command at the top and can't be parsed so we have to drop the first line
                                     def cliOutput = bat(script: awsCliCommand, returnStdout: true).trim()
-
                                     cliOutput = cliOutput.readLines().drop(1).join("\n")
 
                                     // Parse the CLI output as JSON
@@ -222,50 +221,27 @@ pipeline {
                                         return
                                     }
 
-                                    cliOutputJson.Images.each { images ->
-                                        echo "${images.ImageId} ${images.State}"
+                                    cliOutputJson.Images.each { image ->
+                                        echo "${image.ImageId} ${image.State}"
+                                        def amiDBRecord = AMIs.find { it.amiId == image.ImageId }
+                                        amiDBRecord.status = ${image.State}
                                     }
                                 }
                             }
                         }
-
-                        // value.each { AMICreationRequest ->
-                        //     echo "${AMICreationRequest.AmiCreationRequestId}"
-                        // }
                     }
+                }
+            }
+        }
+        stage('SyncAMIStatusToDB') {
+            steps {
+                script {
+                    // Convert the list back to JSON string and pretty print it
+                    def newJsonStr = JsonOutput.toJson(amiCreationRequestDB)
+                    def prettyJsonStr = JsonOutput.prettyPrint(newJsonStr)
 
-                    // def requestsGroupedByAccount = requestsWithPendingAMIs.groupBy { it.Account, it.Region }
-                    
-                    // requestsGroupedByAccount.each { request ->
-                    //     echo "${request}"
-                    // }
-
-                    // def requests = validInstances.groupBy { it.region }
-                    // requestsWithPendingAMIs.each { request ->
-                    //     AMIs = request.AMIs
-
-                    //     role = 'AMICreationRole'
-                    //     region = request.Region
-                    //     account = request.Account
-
-                        // AMIs.each { AMI ->
-                        //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'rod_aws']]) {
-                        //         withAWS(role: role, region: region, roleAccount: account, duration: '3600' ){
-                                
-                        //         def awsCliCommand = "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${instanceNamesStr}\" --region ${region} --output json"
-
-                        //         // Executes the AWS CLI command and does some post-processing.
-                        //         // The output includes the command at the top and can't be parsed so we have to drop the first line
-                        //         def cliOutput = bat(script: awsCliCommand, returnStdout: true).trim()
-                        //         cliOutput = cliOutput.readLines().drop(1).join("\n")
-
-                        //         // Parse the CLI output as JSON
-                        //         def jsonSlurper = new groovy.json.JsonSlurper()
-                        //         def cliOutputJson = jsonSlurper.parseText(cliOutput)
-                        //         }
-                            
-                        //     }
-                        // }
+                    // Write the JSON string back to the file
+                    writeFile(file: amiCreationRequestDBPath, text: prettyJsonStr)
                 }
             }
         }
