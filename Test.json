@@ -1,14 +1,14 @@
 [
     {
         "Status": "AwaitingAvailability",
-        "AmiCreationRequestId": "4596235b-a283-41ed-8c59-629cc9cf3a75",
+        "AmiCreationRequestId": "9f7201bf-9737-4b2e-a497-2d4ba9e0a40e",
         "Account": "554249804926",
         "TicketNumber": "SCTASK00000000",
-        "Mode": "Express",
+        "Mode": "On-Demand",
         "AMIs": [
             {
-                "amiName": "SCTASK00000000_APSPTEST1_02152024_1145_e31",
-                "amiId": "ami-011b5383c23f89634",
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0604_3ad",
+                "amiId": "ami-0a633b8f3aaed6b1b",
                 "instanceDetails": {
                     "instanceId": "i-0bef2a0f24b878fe8",
                     "instanceName": "APSPTEST1",
@@ -17,8 +17,8 @@
                 "status": "Pending"
             },
             {
-                "amiName": "SCTASK00000000_APSPTEST2_02152024_1145_6d2",
-                "amiId": "ami-0a774e137be1d3442",
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0604_82b",
+                "amiId": "ami-07bd236af4901919c",
                 "instanceDetails": {
                     "instanceId": "i-031b9d496414954e0",
                     "instanceName": "APSPTEST2",
@@ -27,8 +27,392 @@
                 "status": "Pending"
             }
         ],
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "dea78bf1-b192-403f-805d-727afee83ce4",
+        "Account": "554249804926",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0607_50f",
+                "amiId": "ami-025614c975e92aea9",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0607_853",
+                "amiId": "ami-0723a31b9d262aef7",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "c9d727c4-38e8-4dcd-a08a-c5ea64d8bef7",
+        "Account": "554249804926",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0624_8ce",
+                "amiId": "ami-02499f740251e897f",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0624_f38",
+                "amiId": "ami-0cb80f937a57a598d",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "64bd7b1b-ca71-499a-8adf-9a4d2b844cc0",
+        "Account": "554249804926",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0628_e9e",
+                "amiId": "ami-0c2a2484dc46295f9",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0628_e4b",
+                "amiId": "ami-06d808dc57257b8ee",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "b215c08d-10f9-400c-b812-73789c47998e",
+        "Account": "554249804926",
+        "User": "unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0635_be8",
+                "amiId": "ami-069f590682998e855",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0635_fbe",
+                "amiId": "ami-0fd3e87fb7c77cfe0",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "46c09467-f30c-4fa2-8f01-451fdcccccef",
+        "Account": "554249804926",
+        "User": "unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0642_53a",
+                "amiId": "ami-0b3db8ec8da7f3cd0",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0642_238",
+                "amiId": "ami-0674e85b75c0ce3d1",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "731b56f0-f531-4efc-a128-1ccacaeda59a",
+        "Account": "554249804926",
+        "User": "Unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0644_ff1",
+                "amiId": "ami-002705b082dd39ce6",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0644_52a",
+                "amiId": "ami-0376e0bf4532bc78a",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "QueuedForExecution",
+        "AmiCreationRequestId": "eb4383c8-18e5-41e8-8d1d-a7f83410fafc",
+        "Account": "554249804926",
+        "User": "Unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "AMIs": [
+            {
+                "amiName": "",
+                "amiId": "",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": ""
+            },
+            {
+                "amiName": "",
+                "amiId": "",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": ""
+            }
+        ],
+        "Environment": "rod_aws",
         "Region": "ap-southeast-1",
-        "Time": "11:45",
-        "Date": "2/15/2024"
+        "Time": "06:47",
+        "Date": "02/19/2024"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "d80ce644-5a7f-41a3-ad2b-69da9d0ebef0",
+        "Account": "554249804926",
+        "User": "Unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0651_b9d",
+                "amiId": "ami-06a24e4dcd19c5ab7",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0651_f0b",
+                "amiId": "ami-042a3bb240eb3fa2c",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1",
+        "Time": "06:51",
+        "Date": "02/19/2024"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "7470a44a-0b46-41a4-ad8b-a18255afdbc4",
+        "Account": "554249804926",
+        "User": "Unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "Express",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0708_331",
+                "amiId": "ami-02ff0fd32724d9639",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0708_bb9",
+                "amiId": "ami-061d8e01b784e84e6",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1",
+        "Time": "07:08",
+        "Date": "02/19/2024"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "e42c11cd-7601-4306-a64b-830b6029120b",
+        "Account": "554249804926",
+        "User": "Unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0710_1f9",
+                "amiId": "ami-0de443b1416523c72",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0710_6ce",
+                "amiId": "ami-01c0436f58c6ab51a",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1"
+    },
+    {
+        "Status": "AwaitingAvailability",
+        "AmiCreationRequestId": "75748db5-de61-4d5f-8c0a-fbcb73bb6296",
+        "Account": "554249804926",
+        "User": "Unknown",
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "AMIs": [
+            {
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0712_99c",
+                "amiId": "ami-0871ae1e4192ec67b",
+                "instanceDetails": {
+                    "instanceId": "i-0bef2a0f24b878fe8",
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            },
+            {
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0712_860",
+                "amiId": "ami-0546a13fdce388d80",
+                "instanceDetails": {
+                    "instanceId": "i-031b9d496414954e0",
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1"
+                },
+                "status": "Pending"
+            }
+        ],
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1"
+    },
+    {
+        "AmiCreationRequestId": "7ac43572-00d6-4bce-922b-1619c92623b2",
+        "Status": "AwaitingAvailability",
+        "Account": "554249804926",
+        "Environment": "rod_aws",
+        "Region": "ap-southeast-1",
+        "AMIs": [
+            {
+                "instanceDetails": {
+                    "instanceName": "APSPTEST1",
+                    "region": "ap-southeast-1",
+                    "instanceId": "i-0bef2a0f24b878fe8"
+                },
+                "status": "Pending",
+                "amiId": "ami-03feb5ec39460dde1",
+                "amiName": "SCTASK00000000_APSPTEST1_02192024_0726_570"
+            },
+            {
+                "instanceDetails": {
+                    "instanceName": "APSPTEST2",
+                    "region": "ap-southeast-1",
+                    "instanceId": "i-031b9d496414954e0"
+                },
+                "status": "Pending",
+                "amiId": "ami-087f42950a4b3fbf1",
+                "amiName": "SCTASK00000000_APSPTEST2_02192024_0726_a48"
+            }
+        ],
+        "TicketNumber": "SCTASK00000000",
+        "Mode": "On-Demand",
+        "User": "admin"
     }
 ]

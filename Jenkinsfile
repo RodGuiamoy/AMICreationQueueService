@@ -71,110 +71,149 @@ pipeline {
                 }
             }
         }
-        stage('GetUpcomingAMICreationRequests') {
-            steps {
-                script {
+        // stage('GetUpcomingAMICreationRequests') {
+        //     steps {
+        //         script {
                     
-                    scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'Scheduled' }
+        //             scheduledAMICreations = amiCreationRequestDB.findAll { it.Status == 'Scheduled' }
 
-                    // def scheduledAMICreationsStr = "Scheduled builds:\n"
-                    // scheduledAMICreationsStr += "-----------------------\n"
-                    scheduledAMICreations.each { item ->
+        //             // def scheduledAMICreationsStr = "Scheduled builds:\n"
+        //             // scheduledAMICreationsStr += "-----------------------\n"
+        //             scheduledAMICreations.each { item ->
 
-                        //     String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
-                        //     String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
+        //                 //     String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
+        //                 //     String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
 
-                        //     scheduledAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
-                        //     scheduledAMICreationsStr += "Account: ${item.Account}\n"
-                        //     scheduledAMICreationsStr += "Instance Names: ${instanceNames}\n"
-                        //     scheduledAMICreationsStr += "Instance IDs: ${instanceIds}\n"
-                        //     scheduledAMICreationsStr += "Region: ${item.Region}\n"
-                        //     scheduledAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
-                        //     scheduledAMICreationsStr += "Mode: ${item.Mode}\n"
-                        //     scheduledAMICreationsStr += "Date: ${item.Date}\n"
-                        //     scheduledAMICreationsStr += "Time: ${item.Time}\n"
-                        //     scheduledAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
-                        //     scheduledAMICreationsStr += "-----------------------\n"
-                        // }
+        //                 //     scheduledAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
+        //                 //     scheduledAMICreationsStr += "Account: ${item.Account}\n"
+        //                 //     scheduledAMICreationsStr += "Instance Names: ${instanceNames}\n"
+        //                 //     scheduledAMICreationsStr += "Instance IDs: ${instanceIds}\n"
+        //                 //     scheduledAMICreationsStr += "Region: ${item.Region}\n"
+        //                 //     scheduledAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
+        //                 //     scheduledAMICreationsStr += "Mode: ${item.Mode}\n"
+        //                 //     scheduledAMICreationsStr += "Date: ${item.Date}\n"
+        //                 //     scheduledAMICreationsStr += "Time: ${item.Time}\n"
+        //                 //     scheduledAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
+        //                 //     scheduledAMICreationsStr += "-----------------------\n"
+        //                 // }
 
-                        // echo "${scheduledAMICreationsStr}"
+        //                 // echo "${scheduledAMICreationsStr}"
                         
-                        executionDateTimeStr = item.Date + ' ' + item.Time
+        //                 executionDateTimeStr = item.Date + ' ' + item.Time
 
-                        Date executionDateTime = null
+        //                 Date executionDateTime = null
 
-                        try {
-                            // Parse the future date and time
-                            def dateFormat = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm")
-                            executionDateTime = dateFormat.parse(executionDateTimeStr)
-                        }
-                        catch (ex) {
-                            // Handle the error without failing the build
-                            unstable("Unable to parse DateTime ${executionDateTimeStr}.")
-                        }
+        //                 try {
+        //                     // Parse the future date and time
+        //                     def dateFormat = new java.text.SimpleDateFormat("MM/dd/yyyy HH:mm")
+        //                     executionDateTime = dateFormat.parse(executionDateTimeStr)
+        //                 }
+        //                 catch (ex) {
+        //                     // Handle the error without failing the build
+        //                     unstable("Unable to parse DateTime ${executionDateTimeStr}.")
+        //                 }
                         
-                        // Get the current date and time
-                        Date currentDate = new Date()
+        //                 // Get the current date and time
+        //                 Date currentDate = new Date()
 
-                        // Calculate the difference in milliseconds
-                        long differenceInMillis = executionDateTime.time - currentDate.time
+        //                 // Calculate the difference in milliseconds
+        //                 long differenceInMillis = executionDateTime.time - currentDate.time
 
-                        // Convert the difference to seconds
-                        int secondsFromNow = differenceInMillis / 1000
+        //                 // Convert the difference to seconds
+        //                 int secondsFromNow = differenceInMillis / 1000
 
-                        item.SecondsFromNow = secondsFromNow
+        //                 item.SecondsFromNow = secondsFromNow
 
-                        if (secondsFromNow <= 0 || secondsFromNow < 900) {
+        //                 if (secondsFromNow <= 0 || secondsFromNow < 900) {
 
-                            upcomingAMICreations << item
+        //                     upcomingAMICreations << item
 
-                        }
-                    }
+        //                 }
+        //             }
 
-                    if (upcomingAMICreations.isEmpty()) {
-                         echo 'No upcoming builds identified.'
-                        currentBuild.result = 'SUCCESS'
-                        return
-                    }
+        //             if (upcomingAMICreations.isEmpty()) {
+        //                  echo 'No upcoming builds identified.'
+        //                 currentBuild.result = 'SUCCESS'
+        //                 return
+        //             }
 
-                    def upcomingAMICreationsStr = "Upcoming AMI Creations:\n"
-                    upcomingAMICreationsStr += "-----------------------\n"
-                    upcomingAMICreations.each { item ->
+        //             def upcomingAMICreationsStr = "Upcoming AMI Creations:\n"
+        //             upcomingAMICreationsStr += "-----------------------\n"
+        //             upcomingAMICreations.each { item ->
 
-                        String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
-                        String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
+        //                 String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
+        //                 String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
 
-                        upcomingAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
-                        upcomingAMICreationsStr += "Account: ${item.Account}\n"
-                        upcomingAMICreationsStr += "Instance Names: ${instanceNames}\n"
-                        upcomingAMICreationsStr += "Instance IDs: ${instanceIds}\n"
-                        upcomingAMICreationsStr += "Region: ${item.Region}\n"
-                        upcomingAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
-                        upcomingAMICreationsStr += "Mode: ${item.Mode}\n"
-                        upcomingAMICreationsStr += "Date: ${item.Date}\n"
-                        upcomingAMICreationsStr += "Time: ${item.Time}\n"
-                        upcomingAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
-                        upcomingAMICreationsStr += "-----------------------\n"
-                    }
+        //                 upcomingAMICreationsStr += "AMI Creation Request Id: ${item.AmiCreationRequestId}\n"
+        //                 upcomingAMICreationsStr += "Account: ${item.Account}\n"
+        //                 upcomingAMICreationsStr += "Instance Names: ${instanceNames}\n"
+        //                 upcomingAMICreationsStr += "Instance IDs: ${instanceIds}\n"
+        //                 upcomingAMICreationsStr += "Region: ${item.Region}\n"
+        //                 upcomingAMICreationsStr += "Ticket Number: ${item.TicketNumber}\n"
+        //                 upcomingAMICreationsStr += "Mode: ${item.Mode}\n"
+        //                 upcomingAMICreationsStr += "Date: ${item.Date}\n"
+        //                 upcomingAMICreationsStr += "Time: ${item.Time}\n"
+        //                 upcomingAMICreationsStr += "SecondsFromNow: ${item.SecondsFromNow}\n"
+        //                 upcomingAMICreationsStr += "-----------------------\n"
+        //             }
 
-                    echo "${upcomingAMICreationsStr}"
-                }
-            }
-        }
-        stage('QueueAMICreationRequestsForExecution') {
+        //             echo "${upcomingAMICreationsStr}"
+        //         }
+        //     }
+        // }
+        // stage('QueueAMICreationRequestsForExecution') {
+        //     steps {
+        //         script {
+        //             upcomingAMICreations.each { item ->
+
+        //                 String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
+        //                 String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
+
+        //                 queueAMICreation(item.AmiCreationRequestId, item.Account, instanceNames, instanceIds, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
+        //             }
+        //         }
+        //     }
+        // }
+        stage('SyncPendingAMIStatus') {
             steps {
                 script {
-                    upcomingAMICreations.each { item ->
+                    def requestsWithPendingAMIs = amiCreationRequestDB.findAll { it.Status == 'AwaitingAvailability' }
 
-                        String instanceNames = item.AMIs.collect { it.instanceDetails.instanceName }.join(',')
-                        String instanceIds = item.AMIs.collect { it.instanceDetails.instanceId }.join(',')
-
-                        queueAMICreation(item.AmiCreationRequestId, item.Account, instanceNames, instanceIds, item.Region, item.TicketNumber, item.Mode, item.Date, item.Time, item.SecondsFromNow)
+                    requestsWithPendingAMIs.each { request ->
+                        echo "${request}"
                     }
+
+                    // def requests = validInstances.groupBy { it.region }
+                    // requestsWithPendingAMIs.each { request ->
+                    //     AMIs = request.AMIs
+
+                    //     role = 'AMICreationRole'
+                    //     region = request.Region
+                    //     account = request.Account
+
+                        // AMIs.each { AMI ->
+                        //     withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'rod_aws']]) {
+                        //         withAWS(role: role, region: region, roleAccount: account, duration: '3600' ){
+                                
+                        //         def awsCliCommand = "aws ec2 describe-instances --filters \"Name=tag:Name,Values=${instanceNamesStr}\" --region ${region} --output json"
+
+                        //         // Executes the AWS CLI command and does some post-processing.
+                        //         // The output includes the command at the top and can't be parsed so we have to drop the first line
+                        //         def cliOutput = bat(script: awsCliCommand, returnStdout: true).trim()
+                        //         cliOutput = cliOutput.readLines().drop(1).join("\n")
+
+                        //         // Parse the CLI output as JSON
+                        //         def jsonSlurper = new groovy.json.JsonSlurper()
+                        //         def cliOutputJson = jsonSlurper.parseText(cliOutput)
+                        //         }
+                            
+                        //     }
+                        // }
                 }
             }
         }
     }
 }
+
 
 
